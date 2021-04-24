@@ -14,7 +14,6 @@ def display():
         tl=int(request.form.get("tl"))
         di=int(request.form.get("di"))
         lp=calculate(sm,m,tl,di)
-        print(lp) 
     return render_template('result.html', lp=lp)      
 
 """
@@ -31,11 +30,14 @@ def data():
     di=int(input("Enter Number of People in Waiting room"))
 """
 def calculate(sm,m,tl,di):
+    c=sm+m+tl+di
+    if c<3:
+        return 0
     lp=0
     lp=lp+(sm*8)
-    lp=lp+(m*8)
-    lp=lp+(tl*8)
-    lp=lp+(di*8)
+    lp=lp+(m*5)
+    lp=lp+(tl*3)
+    lp=lp+(di*2)
     return lp
 
 
