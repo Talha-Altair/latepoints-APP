@@ -1,5 +1,8 @@
 from flask import Flask,render_template, request
-
+import json
+import jsonpath_rw_ext as jp
+import pandas as pd 
+'''
 app  = Flask(__name__)
 
 @app.route("/", methods=["GET","POST"])
@@ -16,7 +19,7 @@ def display():
         lp=calculate(sm,m,tl,di)
     return render_template('result.html', lp=lp)      
 
-"""
+
 def startpy():
     n=int(input("Enter Number of People in Waiting room"))
     if(n>2):
@@ -28,7 +31,7 @@ def data():
     m=int(input("Enter Number of People in Waiting room"))
     tl=int(input("Enter Number of People in Waiting room"))
     di=int(input("Enter Number of People in Waiting room"))
-"""
+
 def calculate(sm,m,tl,di):
     c=sm+m+tl+di
     if c<3:
@@ -39,7 +42,31 @@ def calculate(sm,m,tl,di):
     lp=lp+(tl*3)
     lp=lp+(di*2)
     return lp
+'''
+def data_json():
+    f = open ('users.json', "r")
+
+    data = json.loads(f.read())
+
+    c=(data["data"])   
+
+def data_csv():
+    
+    df = pd.read_csv('zoom1.csv')
+
+    name            = df['Name (Original Name)'].tolist()
+
+    jt       = df['Join Time'].tolist()
+
+    result = {
+            'name'            :  name,
+        'jt'    : jt
+        
+    }
 
 
+'''
 if __name__ == "__main__":
     app.run(debug = True, host='0.0.0.0',port=9500)
+
+'''
